@@ -1,6 +1,6 @@
 import json
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from werkzeug.utils import secure_filename
 import finder
 import cv2
@@ -45,12 +45,9 @@ def detect():
             img = cv2.imread(path_to_file, cv2.IMREAD_COLOR)
 
             processed = finder.find_plane(image=img)
-            processed = cv2.imencode('.jpg', processed)[1]
-            output_img = str(base64.b64encode(processed))
-            output_img = output_img[2:]
-            output_img = output_img[:len(output_img)-2]
+            cv2.imwrite('image.png',processed)
 
-            return jsonify(image=output_img)
+            return send_file('./image.png')
     return "lol"
 
 
