@@ -47,6 +47,8 @@ def detect():
             processed = finder.find_plane(image=img)
             processed = cv2.imencode('.jpg', processed)[1]
             output_img = str(base64.b64encode(processed))
+            output_img = output_img[2:]
+            output_img = output_img[:len(output_img)-2]
 
             return jsonify(image=output_img)
     return "lol"

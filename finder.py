@@ -75,7 +75,7 @@ def find_plane(image=None):
     boxes = non_max_suppression(boxes, probs)
 
     for startX, startY, endX, endY in boxes:
-        cv2.rectangle(clone, (startX, startY), (endX, endY), (255, 0, 0), 2)
+        cv2.rectangle(clone, (startX, startY), (endX, endY), (0, 0, 255), 2)
 
     #clone = cv2.cvtColor(clone, cv2.COLOR_BGR2RGB)
 
