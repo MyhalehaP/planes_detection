@@ -7,6 +7,7 @@ import cv2
 from numpyencoder import NumpyEncoder
 import base64
 
+
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp'}
 UPLOAD_FOLDER = os.path.dirname(__file__)
 
@@ -44,9 +45,14 @@ def detect():
 
             img = cv2.imread(path_to_file, cv2.IMREAD_COLOR)
 
-            processed = finder.find_plane(image=img)
+            processed= finder.find_plane(image=img)
+
+           # processed2 = finder.find_plane(image=img,zoom=True)
+
             processed = cv2.imencode('.png', processed)[1]
-            output_img = base64.b64encode(processed)
+
+            output_img= base64.b64encode(processed)
+
 
 
             return Response(response=output_img,content_type='image/png')

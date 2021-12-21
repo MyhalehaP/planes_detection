@@ -1,9 +1,18 @@
 import time
 import numpy as np
 import tensorflow.keras.models
+import tensorflow as tf
 from cv2 import cv2
 from imutils.object_detection import non_max_suppression
 from img_utilities import image_pyramid, image_reverse_pyramid, sliding_window
+
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+    except RuntimeError as e:
+        print(e)
 
 model = tensorflow.keras.models.load_model('model1.h5')
 
@@ -15,7 +24,7 @@ MIN_PROB = 0.85
 MAX_PROB = 1
 
 
-def find_plane(image=None):
+def find_plane(image=None, zoom=False):
     original = image
     rois = []
     locs = []
@@ -25,8 +34,10 @@ def find_plane(image=None):
     (H, W) = original.shape[:2]
 
     # pyramid = image_pyramid(original, scale=PYR_SCALE, minSize=ROI_SIZE)
-    # pyramid = image_reverse_pyramid(original, scale=PYR_SCALE)
-    pyramid = [original]
+    if zoom :
+        pyramid = image_reverse_pyramid(original, scale=PYR_SCALE, maxSize=(1.1*W,1.1*H))
+    else:
+        pyramid = [original]
 
     for image in pyramid:
         scale = W / float(image.shape[1])
