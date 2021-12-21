@@ -35,7 +35,7 @@ def find_plane(image=None, zoom=False):
 
     # pyramid = image_pyramid(original, scale=PYR_SCALE, minSize=ROI_SIZE)
     if zoom :
-        pyramid = image_reverse_pyramid(original, scale=PYR_SCALE, maxSize=(1.1*W,1.1*H))
+        pyramid = image_reverse_pyramid(original, scale=PYR_SCALE, maxSize=(2*W,2*H))
     else:
         pyramid = [original]
 

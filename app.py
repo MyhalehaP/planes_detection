@@ -31,7 +31,9 @@ def detect():
         if 'file' not in request.files:
             return "No file part"
 
+
         file = request.files['file']
+
 
         if file.filename == '':
             return "No selected file"
@@ -45,9 +47,11 @@ def detect():
 
             img = cv2.imread(path_to_file, cv2.IMREAD_COLOR)
 
-            processed= finder.find_plane(image=img)
+            flag = False
+            if request.form.get('mode') == 'zoom':
+                flag = True
 
-           # processed2 = finder.find_plane(image=img,zoom=True)
+            processed= finder.find_plane(image=img, zoom=flag)
 
             processed = cv2.imencode('.png', processed)[1]
 

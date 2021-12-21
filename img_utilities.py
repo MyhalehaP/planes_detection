@@ -24,6 +24,7 @@ def image_pyramid(image, scale=1.5, minSize=(128, 128)):
 
 
 def image_reverse_pyramid(image, scale=1.5, maxSize=(2048, 2048)):
+    print('zoom')
     # yield the original image
     yield image
     # keep looping over the image pyramid
