@@ -16,7 +16,7 @@ if gpus:
 
 model = tensorflow.keras.models.load_model('model1.h5')
 
-PYR_SCALE = 1.5
+PYR_SCALE = 1.25
 WIN_STEP = 4
 ROI_SIZE = (128, 128)
 INPUT_SIZE = (128, 128)
@@ -35,7 +35,8 @@ def find_plane(image=None, zoom=False):
 
     # pyramid = image_pyramid(original, scale=PYR_SCALE, minSize=ROI_SIZE)
     if zoom :
-        pyramid = image_reverse_pyramid(original, scale=PYR_SCALE, maxSize=(1.51*W,1.51*H))
+        pyramid = image_reverse_pyramid(original, scale=PYR_SCALE, maxSize=(1.26*W,1.26*H))
+        WIN_STEP = 8
     else:
         pyramid = [original]
 
