@@ -25,6 +25,7 @@ MAX_PROB = 1
 
 
 def find_plane(image=None, zoom=False):
+    global WIN_STEP
     original = image
     rois = []
     locs = []
